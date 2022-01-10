@@ -1,6 +1,14 @@
+
+require("load_graphics")
+
 function love.load()
 	GameState = {"Menu"}
+	load_graphic_tiles ()
+
+	
 end
+
+
 
 function pressmenu (k)
 	if k == 'space'  then table.insert(GameState, 1, "Editor") 	end
@@ -21,14 +29,13 @@ function drawmenu ()
 end	
 
 function drawedit ()
-	love.graphics.print('EDIT World!', 400, 300)
+	animation:drawself()
 end	
 
 
 function love.update(dt)
-	
+	animation.update_time (dt)
 end
-
 
 function love.draw()
 	if GameState[1] == "Menu" 	then drawmenu() end

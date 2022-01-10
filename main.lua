@@ -4,8 +4,6 @@ require("load_graphics")
 function love.load()
 	GameState = {"Menu"}
 	load_graphic_tiles ()
-
-	
 end
 
 
@@ -25,11 +23,14 @@ function love.keypressed (k)
 end	
 
 function drawmenu ()
+	love.graphics.setBackgroundColor( 0, 0, 0, alpha)
 	love.graphics.print('Hello World!', 400, 300)
 end	
 
 function drawedit ()
+	love.graphics.setBackgroundColor( 115/255, 27/255, 135/255, 50/100)
 	animation:drawself()
+	love.graphics.draw (Asphalt, 3*80, 3*40, 0, 1)
 end	
 
 

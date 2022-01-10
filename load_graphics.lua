@@ -17,7 +17,6 @@ function newAnimation(image, width, height, duration)
     return animat
 end
 
-
 function load_graphic_tiles ()
 	local speed_animation = 2
 	SS_water = love.graphics.newImage("wasser.png")

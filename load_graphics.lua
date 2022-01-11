@@ -26,7 +26,16 @@ function load_graphic_tiles ()
 for i=1,10 do
 	map[i] = {}
 	for j=1,10 do
-		map[i][j] = newAnimation (SS_water, 80, 40, speed_animation)
+		local a = math.random(3)
+		if a == 1 then
+		    map[i][j] = newAnimation (SS_water, 80, 40, 9)
+		end
+		if a == 2 then
+		    map[i][j] = newAnimation (SS_grass, 80, 40, 50)
+		end
+		if a == 3 then
+		    map[i][j] = newAnimation (SS_sand, 80, 40, 50)
+		end
 	end
 end
 end

@@ -1,4 +1,4 @@
-animation = {}
+map = {}
 
 function newAnimation(image, width, height, duration)
     local animat = {}
@@ -23,31 +23,39 @@ function load_graphic_tiles ()
 	SS_grass = love.graphics.newImage("grass.png")
 	SS_sand  = love.graphics.newImage("ssand.png")
 	Asphalt  = love.graphics.newImage("assphalt.png")
-	animation["Water_anim"] = newAnimation (SS_water, 80, 40, speed_animation)
-	animation["Sand_anim"] = newAnimation (SS_sand,  80, 40, speed_animation)
-	animation["Grass_anim"] = newAnimation (SS_grass, 80, 40, speed_animation)
-
+for i=1,10 do
+	map[i] = {}
+	for j=1,10 do
+		map[i][j] = newAnimation (SS_water, 80, 40, speed_animation)
+	end
+end
 end
 
-function animation.update_time (dt)
- for k,v in pairs(animation) do
- 	if type(v) ~= "function" then 
- 		v.currentTime = v.currentTime + dt
-		if v.currentTime >= v.duration then
-    		v.currentTime = v.currentTime - v.duration
+function map.update_time (self, dt)
+for i=1,10 do
+	for j=1,10 do
+		map[i][j].currentTime = map[i][j].currentTime +dt
+		if map[i][j].currentTime >= map[i][j].duration then
+    		map[i][j].currentTime = map[i][j].currentTime - map[i][j].duration
 		end
 	end
- end
-
+end
 end	
 
-function animation.drawself (self)
-	local count = 0
-	for k,v in pairs(self) do
-		if type(v) ~= "function" then 
-			local spriteNum = math.floor(v.currentTime / v.duration * #v.quads) + 1
-    		love.graphics.draw(v.spriteSheet, v.quads[spriteNum], count*80, count*40, 0, 1)
-    		count = count+1 
-		end 
-	end	 
+function TileToScreen (x,y)
+	local screenX, screenY
+	screenX = - (y * 40) + ( x * 40 ) +360
+	screenY = (y * 20) + (x * 20)
+return screenX, screenY
+end	
+
+
+function map.drawself ()
+for i=1,10 do
+	for j=1,10 do
+		local spriteNum = math.floor(map[i][j].currentTime / map[i][j].duration * #map[i][j].quads) + 1
+		local SX, SY = TileToScreen (i,j)
+    	love.graphics.draw(map[i][j].spriteSheet, map[i][j].quads[spriteNum], SX, SY)
+	end
+end
 end	

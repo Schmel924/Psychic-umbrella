@@ -29,13 +29,13 @@ end
 
 function drawedit ()
 	love.graphics.setBackgroundColor( 115/255, 27/255, 135/255, 50/100)
-	animation:drawself()
-	love.graphics.draw (Asphalt, 3*80, 3*40, 0, 1)
+	map.drawself()
+--	love.graphics.draw (Asphalt, 3*80, 3*40, 0, 1)
 end	
 
 
 function love.update(dt)
-	animation.update_time (dt)
+	map:update_time (dt)
 end
 
 function love.draw()
